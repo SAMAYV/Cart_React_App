@@ -22,7 +22,7 @@ class CartItem extends React.Component {
     }
     decreaseQuantity = () => {
         const {qty} = this.state;
-        if(qty == 0){
+        if(qty === 0){
             return;
         }
         // form 2
@@ -53,7 +53,7 @@ class CartItem extends React.Component {
         return (
             <div className="cart-item">
                 <div className="left-block">
-                    <img style={styles.image}/>
+                    <img alt="" style={styles.image}/>
                 </div>
                 <div className="right-block">
                     <div style={{fontSize: 25}}>{title}</div>
