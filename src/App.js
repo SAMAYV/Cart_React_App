@@ -8,19 +8,26 @@ class App extends React.Component {
     this.state = {
         products: [
             {
-                price: 99,
+                price: 999,
                 title: 'Mobile',
                 qty: 2,
                 img: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 id: 1
             },
             {
-                price: 999,
+                price: 9999,
                 title: 'Phone',
                 qty: 1,
                 img: "https://images.unsplash.com/photo-1520923642038-b4259acecbd7?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGVsZXBob25lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 id: 2
-            }
+            },
+            {
+              price: 99999,
+              title: 'Laptop',
+              qty: 1,
+              img: "https://images.unsplash.com/photo-1559163499-413811fb2344?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fGxhcHRvcHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+              id: 2
+          }
         ]
     }
   }
