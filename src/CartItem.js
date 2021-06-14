@@ -1,7 +1,6 @@
 import React from 'react';
 
-const CartItem = (props) => 
-{
+const CartItem = (props) => {
     const {price, title, qty} = props.product;
     const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct} = props;
     return (
