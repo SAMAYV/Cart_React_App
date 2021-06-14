@@ -2,44 +2,9 @@ import React from 'react';
 
 class CartItem extends React.Component 
 {
-    increaseQuantity = () => {
-        // form 1
-        this.setState({
-            qty: this.state.qty + 1
-        }, () => {
-            console.log(this);
-        });
-    }
-    decreaseQuantity = () => {
-        const {qty} = this.state;
-        if(qty === 0){
-            return;
-        }
-        // form 2
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty - 1
-            }
-        }, () => {
-            console.log(this);
-        })
-    }
-    // testing () {
-    //     const promise = new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             resolve('Done');
-    //         }, 5000)
-    //     });
-    //     promise.then(() => {
-    //         // setState acts like a sync call
-    //         this.setState({qty: this.state.qty + 10});
-    //         this.setState({qty: this.state.qty + 10});
-    //         this.setState({qty: this.state.qty + 10});
-    //         console.log('State', this.state);
-    //     });
-    // }
     render () {
         const {price, title, qty} = this.props.product;
+        const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct} = this.props;
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -50,9 +15,12 @@ class CartItem extends React.Component
                     <div style={{color: '#777'}}>Rs {price}</div>
                     <div style={{color: '#777'}}>Qty {qty}</div>
                     <div className="cart-item-actions">
-                        <img alt="increase" className="action-icons" src="https://image.flaticon.com/icons/png/512/3303/3303893.png" onClick={this.increaseQuantity}/>
-                        <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/png/512/2740/2740679.png" onClick={this.decreaseQuantity}/>
-                        <img alt="delete" className="action-icons" src="https://image.flaticon.com/icons/png/512/3161/3161358.png" />
+                        <img alt="increase" className="action-icons" src="https://image.flaticon.com/icons/png/512/3303/3303893.png" 
+                            onClick={() => onIncreaseQuantity(product)}/>
+                        <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/png/512/2740/2740679.png" 
+                            onClick={() => onDecreaseQuantity(product)}/>
+                        <img alt="delete" className="action-icons" src="https://image.flaticon.com/icons/png/512/3161/3161358.png" 
+                            onClick={() => onDeleteProduct(product.id)}/>
                     </div>
                 </div>
             </div>
