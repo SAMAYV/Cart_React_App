@@ -15,6 +15,8 @@ class App extends React.Component {
 	componentDidMount() {
 		this.db
 			.collection('products')
+			// .where('price', '>', 799)
+			.orderBy('price', 'desc')
 			.onSnapshot((snapshot) => {
 				const products = snapshot.docs.map((doc) => {
 					const data = doc.data();
@@ -55,7 +57,7 @@ class App extends React.Component {
 		if(products[index].qty === 0){
 			return;
 		}
-		
+
 		// products[index].qty -= 1;
 		// this.setState({
 			// products: products
