@@ -10,26 +10,10 @@ class App extends React.Component {
 			products: [],
 			loading: true
     	}
+		this.db = firebase.firestore();
   	}
 	componentDidMount() {
-		// firebase
-		// 	.firestore()
-		// 	.collection('products')
-		// 	.get()
-		// 	.then((snapshot) => {
-		// 		const products = snapshot.docs.map((doc) => {
-		// 			const data = doc.data();
-		// 			data['id'] = doc.id;
-		// 			return data;
-		// 		});
-		// 		this.setState({
-		// 			products,
-		// 			loading: false
-		// 		});
-		// 	})
-
-		firebase
-			.firestore()
+		this.db
 			.collection('products')
 			.onSnapshot((snapshot) => {
 				const products = snapshot.docs.map((doc) => {
@@ -46,11 +30,18 @@ class App extends React.Component {
   	handleIncreaseQuantity = (product) => {
       	const {products} = this.state;
       	const index = products.indexOf(product);
-		products[index].qty += 1;
-
-		this.setState({
-			products: products
-		})
+		const docRef = this.db.collection('products').doc(products[index].id)
+		
+		docRef	
+			.update({
+				qty: products[index].qty + 1
+			})
+			.then(() => {
+				console.log('Updated successfully');
+			})
+			.catch((err) => {
+				console.log('Error: ', err);
+			})
 	}
 	handleDecreaseQuantity = (product) => {
 		const {products} = this.state;
@@ -91,11 +82,28 @@ class App extends React.Component {
 		})
 		return cartTotal;
 	}
+	addProduct = () => {
+		this.db
+			.collection('products')
+			.add({
+				img: '',
+				price: 900,
+				qty: 2,
+				title: 'Washing Machine'
+			})
+			.then((docRef) => {
+
+			})
+			.catch((err) => {
+				console.log('Error: ', err);
+			})
+	}
 	render () {
 		const {products, loading} = this.state;
 		return (
 			<div className="App">
 				<Navbar count={this.getCartCount()}/>
+				{/* <button onClick={this.addProduct} style={{padding: 20, fontSize: 20}}>Add a Product</button> */}
 				<Cart 
 					onIncreaseQuantity={this.handleIncreaseQuantity}
 					onDecreaseQuantity={this.handleDecreaseQuantity}
